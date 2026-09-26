@@ -1505,9 +1505,9 @@ body {
             <div class="container">
                 <div class="calculator-card glass-panel">
                     <div class="calc-header text-center">
-                        <span class="section-badge"><i class="fa-solid fa-calculator"></i> Price Estimator</span>
-                        <h2>Instant Custom Art <span class="gradient-text">Price Calculator</span></h2>
-                        <p>Select your artwork specifications below to calculate an estimated price.</p>
+                        <span class="section-badge"><i class="fa-solid fa-calculator"></i> Transparent Pricing</span>
+                        <h2>Custom Artwork <span class="gradient-text">Pricing Calculator</span></h2>
+                        <p>Select your artwork specifications below to calculate your exact price.</p>
                     </div>
 
                     <form id="price-calc-form" class="calc-grid">
@@ -1516,8 +1516,6 @@ body {
                             <select id="currency-type" class="calc-select">
                                 <option value="INR">🇮🇳 INR (₹) - India</option>
                                 <option value="USD">🇺🇸 USD ($) - International</option>
-                                <option value="EUR">🇪🇺 EUR (€) - Europe</option>
-                                <option value="GBP">🇬🇧 GBP (£) - United Kingdom</option>
                             </select>
                         </div>
 
@@ -1552,7 +1550,7 @@ body {
 
                         <div class="calc-result-box">
                             <div class="price-display">
-                                <span class="price-label">Estimated Investment</span>
+                                <span class="price-label">Total Price</span>
                                 <span class="price-amount" id="calc-price">₹7,499</span>
                                 <span class="price-note"><i class="fa-solid fa-truck-fast"></i> 100% Free Express Insured Doorstep Delivery & Premium Materials Included</span>
                             </div>
@@ -1862,7 +1860,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const priceDisplay = document.getElementById('calc-price');
     const whatsappBtn = document.getElementById('whatsapp-order-btn');
 
-    // Multi-Currency Rates & Formats
+    // Multi-Currency Rates & Formats (Accurate Fixed Pricing)
     const currencyConfig = {
         INR: {
             symbol: '₹',
@@ -1893,36 +1891,6 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             subjectRate: 25,
             format: (val) => '$' + val.toLocaleString('en-US')
-        },
-        EUR: {
-            symbol: '€',
-            code: 'EUR',
-            baseRates: {
-                pencil: 60,
-                watercolor: 110,
-                acrylic: 200,
-                ghibli: 85,
-                thread: 230,
-                wall: 350,
-                video: 115
-            },
-            subjectRate: 25,
-            format: (val) => '€' + val.toLocaleString('de-DE')
-        },
-        GBP: {
-            symbol: '£',
-            code: 'GBP',
-            baseRates: {
-                pencil: 50,
-                watercolor: 95,
-                acrylic: 175,
-                ghibli: 75,
-                thread: 200,
-                wall: 300,
-                video: 100
-            },
-            subjectRate: 20,
-            format: (val) => '£' + val.toLocaleString('en-GB')
         }
     };
 
@@ -1983,7 +1951,7 @@ document.addEventListener('DOMContentLoaded', () => {
 ` +
             `• Subjects: ${subjects}
 ` +
-            `• Estimated Price: ${curr.format(totalPrice)} (Free Insured Doorstep Delivery Included)
+            `• Total Price: ${curr.format(totalPrice)} (Free Insured Doorstep Delivery Included)
 
 ` +
             `Can we discuss details and reference photos?`

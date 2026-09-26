@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const priceDisplay = document.getElementById('calc-price');
     const whatsappBtn = document.getElementById('whatsapp-order-btn');
 
-    // Multi-Currency Rates & Formats
+    // Multi-Currency Rates & Formats (Accurate Fixed Pricing)
     const currencyConfig = {
         INR: {
             symbol: '₹',
@@ -125,36 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             subjectRate: 25,
             format: (val) => '$' + val.toLocaleString('en-US')
-        },
-        EUR: {
-            symbol: '€',
-            code: 'EUR',
-            baseRates: {
-                pencil: 60,
-                watercolor: 110,
-                acrylic: 200,
-                ghibli: 85,
-                thread: 230,
-                wall: 350,
-                video: 115
-            },
-            subjectRate: 25,
-            format: (val) => '€' + val.toLocaleString('de-DE')
-        },
-        GBP: {
-            symbol: '£',
-            code: 'GBP',
-            baseRates: {
-                pencil: 50,
-                watercolor: 95,
-                acrylic: 175,
-                ghibli: 75,
-                thread: 200,
-                wall: 300,
-                video: 100
-            },
-            subjectRate: 20,
-            format: (val) => '£' + val.toLocaleString('en-GB')
         }
     };
 
@@ -211,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `• Service: ${serviceName}\n` +
             `• Size: ${sizeName}\n` +
             `• Subjects: ${subjects}\n` +
-            `• Estimated Price: ${curr.format(totalPrice)} (Free Insured Doorstep Delivery Included)\n\n` +
+            `• Total Price: ${curr.format(totalPrice)} (Free Insured Doorstep Delivery Included)\n\n` +
             `Can we discuss details and reference photos?`
         );
 
