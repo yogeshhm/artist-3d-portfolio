@@ -374,6 +374,16 @@
 
                     <form id="price-calc-form" class="calc-grid">
                         <div class="calc-group">
+                            <label for="currency-type"><i class="fa-solid fa-coins"></i> Currency & Country</label>
+                            <select id="currency-type" class="calc-select">
+                                <option value="INR">🇮🇳 INR (₹) - India</option>
+                                <option value="USD">🇺🇸 USD ($) - International</option>
+                                <option value="EUR">🇪🇺 EUR (€) - Europe</option>
+                                <option value="GBP">🇬🇧 GBP (£) - United Kingdom</option>
+                            </select>
+                        </div>
+
+                        <div class="calc-group">
                             <label for="service-type"><i class="fa-solid fa-paintbrush"></i> Service Category</label>
                             <select id="service-type" class="calc-select">
                                 <option value="pencil">Pencil Sketch / Color Pencil (Portraits)</option>
@@ -405,8 +415,8 @@
                         <div class="calc-result-box">
                             <div class="price-display">
                                 <span class="price-label">Estimated Investment</span>
-                                <span class="price-amount" id="calc-price">$120</span>
-                                <span class="price-note">*Includes premium materials & express insured shipping</span>
+                                <span class="price-amount" id="calc-price">₹7,499</span>
+                                <span class="price-note"><i class="fa-solid fa-truck-fast"></i> 100% Free Express Insured Doorstep Delivery & Premium Materials Included</span>
                             </div>
 
                             <a id="whatsapp-order-btn" href="https://wa.me/?text=Hi%20ArtKid!%20I%20want%20to%20commission%20an%20artwork." target="_blank" class="btn btn-primary btn-block glow-btn">
