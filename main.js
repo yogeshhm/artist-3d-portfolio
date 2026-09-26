@@ -3,28 +3,30 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. 3D Card Tilt Physics Effect
-    const tiltCards = document.querySelectorAll('.tilt-card');
+    // 1. 3D Card Tilt Physics Effect (Only on devices that support hover / mouse)
+    const isHoverDevice = window.matchMedia('(hover: hover)').matches;
+    if (isHoverDevice) {
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
 
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
 
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -10; // deg
+                const rotateY = ((x - centerX) / centerX) * 10;  // deg
 
-            const rotateX = ((y - centerY) / centerY) * -12; // deg
-            const rotateY = ((x - centerX) / centerX) * 12;  // deg
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
         });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        });
-    });
+    }
 
     // 2. Navbar Scroll Class Toggle
     const navbar = document.querySelector('.navbar');
@@ -36,25 +38,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Mobile Navigation Menu Toggle
+    // 3. Mobile Drawer Navigation Controller
     const mobileToggle = document.getElementById('mobile-toggle');
-    const navLinks = document.querySelector('.nav-links');
+    const mobileClose = document.getElementById('mobile-close');
+    const mobileBackdrop = document.getElementById('mobile-backdrop');
+    const navLinks = document.getElementById('nav-links');
+    const navItems = document.querySelectorAll('.nav-link, #mobile-nav-order-btn');
 
-    if (mobileToggle) {
-        mobileToggle.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.width = '100%';
-                navLinks.style.background = 'rgba(7,8,13,0.95)';
-                navLinks.style.padding = '1.5rem';
-                navLinks.style.backdropFilter = 'blur(20px)';
-            }
-        });
+    function openMobileMenu() {
+        if (navLinks) navLinks.classList.add('open');
+        if (mobileBackdrop) mobileBackdrop.classList.add('open');
+        document.body.style.overflow = 'hidden'; // prevent background scrolling while drawer is open
     }
+
+    function closeMobileMenu() {
+        if (navLinks) navLinks.classList.remove('open');
+        if (mobileBackdrop) mobileBackdrop.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
+    if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+    if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileMenu);
+
+    navItems.forEach(item => {
+        item.addEventListener('click', closeMobileMenu);
+    });
 
     // 4. Portfolio Gallery Category Filtering
     const filterBtns = document.querySelectorAll('.filter-btn');
