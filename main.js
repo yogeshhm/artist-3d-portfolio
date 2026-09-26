@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `• Service: ${serviceName}\n` +
             `• Size: ${sizeName}\n` +
             `• Subjects: ${subjects}\n` +
-            `• Total Price: ${curr.format(totalPrice)} (Free Insured Doorstep Delivery Included)\n\n` +
+            `• Total Price: ${curr.format(totalPrice)} (Free Insured Delivery Included)\n\n` +
             `Can we discuss details and reference photos?`
         );
 
