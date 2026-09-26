@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraArt Studio | Fine Art, Murals & Cinematic Video Editing</title>
+    <meta name="description" content="Custom Handcrafted Fine Art, Pencil Sketches, Watercolor Portraits, Wall Murals, Ghibli Art, Thread Art & Instagram Reels Videography.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Three.js CDN for 3D graphics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- 3D WebGL Canvas Background -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Glowing Background Lights -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                <span class="logo-text">AURA<span class="highlight">ART</span></span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#gallery" class="nav-link active">Gallery</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#reels" class="nav-link">Video & Reels</a>
+                <a href="#calculator" class="nav-link">Calculator</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#calculator" class="btn btn-primary glow-btn">
+                    <i class="fa-solid fa-paintbrush"></i> Book Commission
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-palette"></i> Master Artist & Visual Studio
+                    </div>
+                    <h1 class="hero-title">
+                        Bringing Your <span class="gradient-text">Imagination</span> to Life in 3D & Fine Art
+                    </h1>
+                    <p class="hero-subtitle">
+                        From hand-drawn pencil sketches and vibrant Ghibli art to custom wall murals, thread art, and high-impact Instagram Reels editing.
+                    </p>
+                    
+                    <div class="hero-cta-group">
+                        <a href="#gallery" class="btn btn-lg btn-primary glow-btn">
+                            <i class="fa-solid fa-images"></i> Explore Portfolio
+                        </a>
+                        <a href="#reels" class="btn btn-lg btn-outline">
+                            <i class="fa-solid fa-circle-play"></i> Watch Reels
+                        </a>
+                    </div>
+
+                    <!-- Stats Counter -->
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="500">500+</span>
+                            <span class="stat-label">Artworks Created</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="10">10+</span>
+                            <span class="stat-label">Specialized Skills</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="99">99.4%</span>
+                            <span class="stat-label">Client Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero 3D Card Showcase -->
+                <div class="hero-visual">
+                    <div class="card-3d-stack">
+                        <div class="card-3d main-card tilt-card" data-tilt>
+                            <div class="card-image-wrapper">
+                                <img src="./assets/ghibli.jpg" alt="Studio Ghibli Art Masterpiece">
+                                <span class="card-tag"><i class="fa-solid fa-star"></i> Featured Artwork</span>
+                            </div>
+                            <div class="card-info">
+                                <h3>Ghibli Valley Cottage</h3>
+                                <p>Custom Digital & Watercolor Painting</p>
+                            </div>
+                        </div>
+
+                        <div class="card-3d sub-card sub-card-1 tilt-card" data-tilt>
+                            <img src="./assets/watercolor.jpg" alt="Watercolor Portrait">
+                        </div>
+                        
+                        <div class="card-3d sub-card sub-card-2 tilt-card" data-tilt>
+                            <img src="./assets/pencil.jpg" alt="Pencil Sketch">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Grid Section -->
+        <section id="services" class="services-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-badge">Capabilities</span>
+                    <h2 class="section-title">10 Specialized <span class="gradient-text">Artistic Skills</span></h2>
+                    <p class="section-subtitle">Crafted with passion, precision, and relentless attention to detail.</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-pencil"></i></div>
+                        <h3>Pencil Sketching</h3>
+                        <p>Ultra-realistic graphite portraits capturing emotion, depth, and fine line detail on heavy cartridge paper.</p>
+                        <span class="service-chip">Handmade</span>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-paint-brush"></i></div>
+                        <h3>Colour Pencil Sketch</h3>
+                        <p>Vibrant multi-layer colored pencil art bringing rich skin tones, textures, and luminous colors to life.</p>
+                        <span class="service-chip">Popular</span>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-brush"></i></div>
+                        <h3>Wall Design & Murals</h3>
+                        <p>Large-scale custom interior & exterior wall art murals that transform living rooms, cafes, and office spaces.</p>
+                        <span class="service-chip">Large Format</span>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-droplet"></i></div>
+                        <h3>Watercolor Portraits</h3>
+                        <p>Fluid, expressive watercolor portraiture with dynamic pigment splatters and soft artistic blending.</p>
+                        <span class="service-chip">Fine Art</span>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
+                        <h3>Acrylic Canvas Painting</h3>
+                        <p>Textured impasto & palette knife acrylic paintings on stretched cotton canvas with high color vibrancy.</p>
+                        <span class="service-chip">Canvas</span>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+                        <h3>Thread & String Art</h3>
+                        <p>Intricate geometric string art woven meticulously across thousands of pins over dark solid wood panels.</p>
+                        <span class="service-chip">Unique Craft</span>
+                    </div>
+
+                    <!-- Service 7 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-film"></i></div>
+                        <h3>Video Editing (Reels)</h3>
+                        <p>High-converting Instagram Reels, YouTube Shorts, rhythmic transition cuts, color grading, and motion sync.</p>
+                        <span class="service-chip">Digital Media</span>
+                    </div>
+
+                    <!-- Service 8 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-video"></i></div>
+                        <h3>Smooth Videography</h3>
+                        <p>Cinematic smooth camera movements, behind-the-scenes art creation capture, product reels, and event filming.</p>
+                        <span class="service-chip">Cinematic</span>
+                    </div>
+
+                    <!-- Service 9 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+                        <h3>Studio Ghibli Art</h3>
+                        <p>Whimsical Ghibli-inspired customized anime portraits, magical scenic backgrounds, and nostalgic color aesthetics.</p>
+                        <span class="service-chip">Trending</span>
+                    </div>
+
+                    <!-- Service 10 -->
+                    <div class="service-card tilt-card">
+                        <div class="service-icon"><i class="fa-solid fa-gift"></i></div>
+                        <h3>Handmade Gifts & Comics</h3>
+                        <p>Custom handmade gift boxes, comic book illustrations, personalized memory albums, and customized storybooks.</p>
+                        <span class="service-chip">Customized</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Art Gallery -->
+        <section id="gallery" class="gallery-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-badge">Portfolio</span>
+                    <h2 class="section-title">Featured <span class="gradient-text">Masterpieces</span></h2>
+                    <p class="section-subtitle">Filter by category to inspect recent custom commissions.</p>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">All Works</button>
+                    <button class="filter-btn" data-filter="portrait">Portraits & Sketches</button>
+                    <button class="filter-btn" data-filter="canvas">Canvas & Murals</button>
+                    <button class="filter-btn" data-filter="ghibli">Ghibli & Digital</button>
+                    <button class="filter-btn" data-filter="craft">Thread & Handmade</button>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="gallery-grid">
+                    <!-- Gallery Item 1 -->
+                    <div class="gallery-item tilt-card" data-category="ghibli" data-img="./assets/ghibli.jpg" data-title="Ghibli Valley Cottage" data-desc="Custom Studio Ghibli style watercolor landscape commission.">
+                        <div class="gallery-image">
+                            <img src="./assets/ghibli.jpg" alt="Ghibli Art Landscape">
+                            <div class="gallery-overlay">
+                                <span class="overlay-icon"><i class="fa-solid fa-expand"></i></span>
+                                <h4>Ghibli Valley Cottage</h4>
+                                <p>Watercolor & Digital</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 2 -->
+                    <div class="gallery-item tilt-card" data-category="portrait" data-img="./assets/watercolor.jpg" data-title="Ethereal Splatter Portrait" data-desc="Expressive watercolor portrait with fluid color splashes.">
+                        <div class="gallery-image">
+                            <img src="./assets/watercolor.jpg" alt="Watercolor Portrait Artwork">
+                            <div class="gallery-overlay">
+                                <span class="overlay-icon"><i class="fa-solid fa-expand"></i></span>
+                                <h4>Ethereal Splatter Portrait</h4>
+                                <p>Watercolor on Paper</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 3 -->
+                    <div class="gallery-item tilt-card" data-category="portrait" data-img="./assets/pencil.jpg" data-title="Hyper-Realistic Graphite Sketch" data-desc="Detailed pencil sketch with graphite shading.">
+                        <div class="gallery-image">
+                            <img src="./assets/pencil.jpg" alt="Pencil Sketch Portrait">
+                            <div class="gallery-overlay">
+                                <span class="overlay-icon"><i class="fa-solid fa-expand"></i></span>
+                                <h4>Hyper-Realistic Sketch</h4>
+                                <p>Graphite & Color Pencil</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 4 -->
+                    <div class="gallery-item tilt-card" data-category="canvas" data-img="./assets/wall.jpg" data-title="Modern Interior Wall Mural" data-desc="Bespoke hand-painted wall design in contemporary apartment.">
+                        <div class="gallery-image">
+                            <img src="./assets/wall.jpg" alt="Wall Design Mural">
+                            <div class="gallery-overlay">
+                                <span class="overlay-icon"><i class="fa-solid fa-expand"></i></span>
+                                <h4>Interior Wall Mural</h4>
+                                <p>Large Wall Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instagram Reels & Videography Section -->
+        <section id="reels" class="reels-section section-padding">
+            <div class="container">
+                <div class="reels-wrapper">
+                    <div class="reels-info">
+                        <span class="section-badge"><i class="fa-brands fa-instagram"></i> Media & Content Studio</span>
+                        <h2 class="section-title">Cinematic <span class="gradient-text">Reels & Video Editing</span></h2>
+                        <p class="section-subtitle">
+                            We don't just create art—we capture the process in high-engagement Instagram Reels and smooth cinematic videos.
+                        </p>
+                        
+                        <div class="reels-features">
+                            <div class="feature-bullet">
+                                <div class="bullet-icon"><i class="fa-solid fa-bolt"></i></div>
+                                <div>
+                                    <h4>Fast-Paced Motion Sync</h4>
+                                    <p>Trending audio sync, beat-matched transitions, and dynamic sound design.</p>
+                                </div>
+                            </div>
+                            <div class="feature-bullet">
+                                <div class="bullet-icon"><i class="fa-solid fa-sliders"></i></div>
+                                <div>
+                                    <h4>Cinematic Color Grading</h4>
+                                    <p>Rich aesthetic LUTs, high-contrast mood palettes, and 4K crisp output.</p>
+                                </div>
+                            </div>
+                            <div class="feature-bullet">
+                                <div class="bullet-icon"><i class="fa-solid fa-camera"></i></div>
+                                <div>
+                                    <h4>Smooth Gimbal Videography</h4>
+                                    <p>Silky smooth camera movements filming art reveal moments & products.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smartphone Glassmorphic Frame Player -->
+                    <div class="phone-frame-wrapper tilt-card">
+                        <div class="phone-frame">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen">
+                                <div class="reel-video-placeholder">
+                                    <div class="reel-play-overlay">
+                                        <div class="pulse-play-btn" id="play-reel-btn">
+                                            <i class="fa-solid fa-play"></i>
+                                        </div>
+                                    </div>
+                                    <img src="./assets/ghibli.jpg" class="reel-poster" alt="Reel Artwork Preview">
+                                    
+                                    <!-- Mock Reel UI elements -->
+                                    <div class="reel-ui-sidebar">
+                                        <div class="reel-action"><i class="fa-solid fa-heart"></i> <span>14.2K</span></div>
+                                        <div class="reel-action"><i class="fa-solid fa-comment"></i> <span>842</span></div>
+                                        <div class="reel-action"><i class="fa-solid fa-paper-plane"></i> <span>Send</span></div>
+                                    </div>
+
+                                    <div class="reel-ui-bottom">
+                                        <div class="reel-author">
+                                            <span class="author-avatar">🎨</span>
+                                            <span class="author-name">@aura_art_studio</span>
+                                            <button class="follow-btn">Follow</button>
+                                        </div>
+                                        <p class="reel-caption">Speed painting custom Ghibli anime landscape! 🖌️✨ #ghibliart #artwork</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Commission Price Calculator -->
+        <section id="calculator" class="calculator-section section-padding">
+            <div class="container">
+                <div class="calculator-card glass-panel">
+                    <div class="calc-header text-center">
+                        <span class="section-badge"><i class="fa-solid fa-calculator"></i> Price Estimator</span>
+                        <h2>Instant Commission <span class="gradient-text">Cost Calculator</span></h2>
+                        <p>Select your artwork specifications below to calculate an estimated price.</p>
+                    </div>
+
+                    <form id="price-calc-form" class="calc-grid">
+                        <div class="calc-group">
+                            <label for="service-type"><i class="fa-solid fa-paintbrush"></i> Service Category</label>
+                            <select id="service-type" class="calc-select">
+                                <option value="pencil">Pencil Sketch / Color Pencil (Portraits)</option>
+                                <option value="watercolor" selected>Water Colour Portrait Painting</option>
+                                <option value="acrylic">Acrylic Painting on Stretched Canvas</option>
+                                <option value="ghibli">Custom Ghibli Style Digital/Art</option>
+                                <option value="thread">Thread / String Art Panel</option>
+                                <option value="wall">Wall Design & Mural Painting</option>
+                                <option value="video">Instagram Reel / Video Editing</option>
+                            </select>
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="art-size"><i class="fa-solid fa-expand"></i> Size / Dimensions</label>
+                            <select id="art-size" class="calc-select">
+                                <option value="a4">A4 Size (8.3 x 11.7 in)</option>
+                                <option value="a3" selected>A3 Size (11.7 x 16.5 in)</option>
+                                <option value="canvas">Large Canvas (18 x 24 in)</option>
+                                <option value="mural">Wall Area (Per Sq. Ft)</option>
+                                <option value="reel">Standard Reel (30-60 Seconds)</option>
+                            </select>
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="subjects-count"><i class="fa-solid fa-user"></i> Number of Persons / Subjects</label>
+                            <input type="number" id="subjects-count" class="calc-input" value="1" min="1" max="10">
+                        </div>
+
+                        <div class="calc-result-box">
+                            <div class="price-display">
+                                <span class="price-label">Estimated Investment</span>
+                                <span class="price-amount" id="calc-price">$120</span>
+                                <span class="price-note">*Includes premium materials & express insured shipping</span>
+                            </div>
+
+                            <a id="whatsapp-order-btn" href="https://wa.me/?text=Hi%20AuraArt!%20I%20want%20to%20commission%20an%20artwork." target="_blank" class="btn btn-primary btn-block glow-btn">
+                                <i class="fa-brands fa-whatsapp"></i> Book Order via WhatsApp
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <span class="logo-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                    <span class="logo-text">AURA<span class="highlight">ART</span></span>
+                </a>
+                <p>Creating timeless fine art, wall designs & high-converting video content.</p>
+            </div>
+
+            <div class="footer-socials">
+                <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="social-icon" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>© 2026 AuraArt Studio. Handcrafted with passion & 3D WebGL technology.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal for Art Inspection -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <div class="lightbox-content glass-panel">
+            <button class="lightbox-close" id="modal-close">&times;</button>
+            <div class="lightbox-body">
+                <div class="lightbox-image-col">
+                    <img id="modal-img" src="" alt="Enlarged Artwork">
+                </div>
+                <div class="lightbox-info-col">
+                    <h3 id="modal-title">Artwork Title</h3>
+                    <p id="modal-desc">Artwork Description</p>
+                    <div class="modal-actions">
+                        <a href="#calculator" class="btn btn-primary glow-btn" id="modal-commission-btn">Commission Similar Work</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Scripts -->
+    <script src="scene3d.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
