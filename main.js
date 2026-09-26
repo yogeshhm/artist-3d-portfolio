@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Multi-Currency Commission Cost Calculator Engine
+    // 5. Multi-Currency Custom Art Price Calculator Engine
     const currencySelect = document.getElementById('currency-type');
     const serviceSelect = document.getElementById('service-type');
     const sizeSelect = document.getElementById('art-size');
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const sizeName = sizeSelect.options[sizeSelect.selectedIndex].text;
         
         const message = encodeURIComponent(
-            `Hi ArtKid Studio! I would like to commission an artwork:\n` +
+            `Hi ArtKid Studio! I would like to order a custom artwork:\n` +
             `• Service: ${serviceName}\n` +
             `• Size: ${sizeName}\n` +
             `• Subjects: ${subjects}\n` +
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modal && modalImg && modalTitle && modalDesc) {
                 modalImg.src = imgSrc;
                 modalTitle.textContent = title || 'Artwork Showcase';
-                modalDesc.textContent = desc || 'Custom commissioned masterpiece handcrafted by ArtKid Studio.';
+                modalDesc.textContent = desc || 'Custom handcrafted masterpiece made by ArtKid Studio.';
                 modal.classList.add('active');
             }
         });
