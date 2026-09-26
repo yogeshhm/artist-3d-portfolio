@@ -1,4 +1,4 @@
-# 🎨 AuraArt Studio - 3D Interactive Fine Art & Video Studio Portfolio
+# 🎨 ArtKid Studio - 3D Interactive Fine Art & Video Studio Portfolio
 
 A cutting-edge, high-performance interactive website for fine art commissions, wall murals, and Instagram Reels video editing. Built with **Three.js (WebGL)**, dynamic 3D physics tilt cards, modern dark cyber-glassmorphism, and a live pricing calculator.
 
@@ -70,4 +70,4 @@ This repository is pre-configured with `vercel.json` for one-click deployment:
 
 ## 📄 License
 
-MIT License © 2026 AuraArt Studio. Handcrafted with passion.
+MIT License © 2026 ArtKid Studio. Handcrafted with passion.

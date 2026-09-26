@@ -1,5 +1,5 @@
 /**
- * AuraArt Studio - 3D WebGL Background Scene
+ * ArtKid Studio - 3D WebGL Background Scene
  * Built with Three.js
  */
 

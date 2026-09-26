@@ -1,5 +1,5 @@
 /**
- * AuraArt Studio - Main Interactivity Script
+ * ArtKid Studio - Main Interactivity Script
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const sizeName = sizeSelect.options[sizeSelect.selectedIndex].text;
         
         const message = encodeURIComponent(
-            `Hi AuraArt Studio! I would like to commission an artwork:\n` +
+            `Hi ArtKid Studio! I would like to commission an artwork:\n` +
             `• Service: ${serviceName}\n` +
             `• Size: ${sizeName}\n` +
             `• Subjects: ${subjects}\n` +
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modal && modalImg && modalTitle && modalDesc) {
                 modalImg.src = imgSrc;
                 modalTitle.textContent = title || 'Artwork Showcase';
-                modalDesc.textContent = desc || 'Custom commissioned masterpiece handcrafted by AuraArt Studio.';
+                modalDesc.textContent = desc || 'Custom commissioned masterpiece handcrafted by ArtKid Studio.';
                 modal.classList.add('active');
             }
         });
