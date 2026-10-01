@@ -752,6 +752,9 @@ body {
 .phone-frame-wrapper {
     display: flex;
     justify-content: center;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .phone-frame {
@@ -760,9 +763,15 @@ body {
     background: #000;
     border-radius: 40px;
     border: 4px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(157, 78, 221, 0.3);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.25);
     position: relative;
     overflow: hidden;
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.phone-frame.tilt-card:hover {
+    border-color: rgba(0, 240, 255, 0.4);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 240, 255, 0.4);
 }
 
 .phone-notch {
