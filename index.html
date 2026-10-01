@@ -338,24 +338,33 @@
                         </div>
                     </div>
 
-                    <!-- Instagram Embedded Reel -->
-                    <div class="reel-embed-box tilt-card">
-                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Ddts-i3P8MR/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#0f121d; border:1px solid rgba(255,255,255,0.1); border-radius:16px; box-shadow:0 16px 40px rgba(0,0,0,0.6); margin: 1px auto; max-width:540px; min-width:326px; padding:0; width:100%;">
-                            <div style="padding:16px;">
-                                <a href="https://www.instagram.com/reel/Ddts-i3P8MR/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#0f121d; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%; color:#f0f3fe;" target="_blank">
-                                    <div style="display: flex; flex-direction: row; align-items: center;">
-                                        <div style="background: linear-gradient(135deg, #00f0ff, #ff007a); border-radius: 50%; height: 40px; margin-right: 14px; width: 40px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:18px;">🎨</div>
-                                        <div style="display: flex; flex-direction: column; flex-grow: 1; text-align: left;">
-                                            <div style="font-weight: 700; color: #fff; font-size: 14px;">Lokesh Nagekar (@art.kid_555)</div>
-                                            <div style="color: #00f0ff; font-size: 12px;">Watch Speed Art Reel on Instagram</div>
-                                        </div>
+                    <!-- Interactive Video / Reel Player Card (Dummy preview while IG profile restores) -->
+                    <div class="phone-frame-wrapper tilt-card">
+                        <div class="phone-frame">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen">
+                                <div class="reel-video-placeholder">
+                                    <img src="./assets/ghibli.jpg" alt="Speed Painting Reel Preview" class="reel-poster">
+                                    <div class="reel-play-overlay">
+                                        <button class="pulse-play-btn" id="play-reel-btn" aria-label="Play Reel Preview">
+                                            <i class="fa-solid fa-play"></i>
+                                        </button>
                                     </div>
-                                    <div style="padding: 19% 0;"></div>
-                                    <div style="color:#00f0ff; font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; line-height:18px;">▶️ Watch Reel on Instagram</div>
-                                </a>
+                                    <div class="reel-ui-sidebar">
+                                        <div class="reel-action"><i class="fa-solid fa-heart"></i><span>12.4k</span></div>
+                                        <div class="reel-action"><i class="fa-solid fa-comment"></i><span>482</span></div>
+                                        <div class="reel-action"><i class="fa-solid fa-share-nodes"></i><span>Share</span></div>
+                                    </div>
+                                    <div class="reel-ui-bottom">
+                                        <div class="reel-author">
+                                            <span class="author-name">@art.kid_555</span>
+                                            <span class="follow-btn">Artist</span>
+                                        </div>
+                                        <p class="reel-caption">Speed Painting Process • Studio Ghibli Anime Landscape 🎨✨</p>
+                                    </div>
+                                </div>
                             </div>
-                        </blockquote>
-                        <script async src="//www.instagram.com/embed.js"></script>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -422,27 +431,16 @@
                         </div>
 
                         <div class="calc-result-box">
-                            <div class="price-breakdown-grid">
-                                <div class="price-box main-price-box">
-                                    <span class="price-label">Total Final Price</span>
-                                    <span class="price-amount" id="calc-price">₹7,499</span>
-                                </div>
-                                <div class="price-box advance-price-box">
-                                    <span class="price-label">50% Advance to Start</span>
-                                    <span class="advance-amount" id="calc-advance">₹3,750</span>
-                                </div>
-                                <div class="price-box balance-price-box">
-                                    <span class="price-label">50% on Final Approval</span>
-                                    <span class="balance-amount" id="calc-balance">₹3,749</span>
-                                </div>
+                            <div class="single-price-box">
+                                <span class="price-label">Total Price</span>
+                                <span class="price-amount" id="calc-price">₹7,499</span>
+                                <span class="price-note">
+                                    <i class="fa-solid fa-truck-fast"></i> 100% Free Express Insured Delivery &amp; Premium Materials Included
+                                </span>
                             </div>
 
-                            <span class="price-note">
-                                <i class="fa-solid fa-shield-halved"></i> <strong>50% Advance Booking</strong> • Remaining 50% only after you approve the final artwork • Free Insured Delivery Included
-                            </span>
-
                             <a id="whatsapp-order-btn" href="https://wa.me/?text=Hi%20ArtKid!%20I%20want%20to%20order%20a%20custom%20artwork." target="_blank" class="btn btn-primary btn-block glow-btn">
-                                <i class="fa-brands fa-whatsapp"></i> Book Order with 50% Advance
+                                <i class="fa-brands fa-whatsapp"></i> Book Order on WhatsApp
                             </a>
 
                             <div class="custom-inquiry-box">

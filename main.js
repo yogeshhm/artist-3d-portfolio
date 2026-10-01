@@ -101,8 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const portraitTypeSelect = document.getElementById('portrait-type');
     const sizeSelect = document.getElementById('art-size');
     const priceDisplay = document.getElementById('calc-price');
-    const advanceDisplay = document.getElementById('calc-advance');
-    const balanceDisplay = document.getElementById('calc-balance');
     const whatsappBtn = document.getElementById('whatsapp-order-btn');
 
     // Multi-Currency Rates & Formats (Accurate Fixed Pricing)
@@ -188,8 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isCustom) {
             priceDisplay.textContent = 'Custom Quote';
-            if (advanceDisplay) advanceDisplay.textContent = '50% on Quote';
-            if (balanceDisplay) balanceDisplay.textContent = '50% on Approval';
 
             const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
             const sizeName = sizeSelect.options[sizeSelect.selectedIndex].text;
@@ -215,15 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const subjectExtra = Math.max(0, subjectsCount - 1) * curr.subjectRate;
 
         const totalPrice = Math.round((basePrice * multiplier) + subjectExtra);
-        const advancePrice = Math.round(totalPrice * 0.5);
-        const balancePrice = totalPrice - advancePrice;
 
         priceDisplay.textContent = curr.format(totalPrice);
-        if (advanceDisplay) advanceDisplay.textContent = curr.format(advancePrice);
-        if (balanceDisplay) balanceDisplay.textContent = curr.format(balancePrice);
 
         if (whatsappBtn) {
-            whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Book Order with 50% Advance`;
+            whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Book Order on WhatsApp`;
         }
 
         // Update WhatsApp pre-filled order text
@@ -237,7 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `• Type: ${typeName}\n` +
             `• Size: ${sizeName}\n` +
             `• Total Price: ${curr.format(totalPrice)}\n` +
-            `• 50% Advance to Start: ${curr.format(advancePrice)} (Remaining 50% only after approving final artwork)\n` +
             `• Free Insured Delivery Included\n\n` +
             `Can we discuss details and reference photos?`
         );

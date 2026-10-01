@@ -946,79 +946,45 @@ body {
     gap: 1.5rem;
 }
 
-.price-breakdown-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 1.25rem;
-    width: 100%;
-    margin-bottom: 0.5rem;
-}
-
-.price-box {
-    background: rgba(7, 8, 13, 0.7);
-    border: 1px solid var(--border-glass);
+.single-price-box {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(157, 78, 221, 0.08));
+    border: 1px solid rgba(0, 240, 255, 0.3);
     border-radius: var(--radius-md);
-    padding: 1.25rem 1rem;
+    padding: 2rem 2.5rem;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 240, 255, 0.1);
     transition: var(--transition-fast);
 }
 
-.price-box:hover {
+.single-price-box:hover {
     border-color: var(--border-glass-hover);
     transform: translateY(-2px);
-}
-
-.main-price-box {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(157, 78, 221, 0.08));
-    border-color: rgba(0, 240, 255, 0.3);
-}
-
-.advance-price-box {
-    background: linear-gradient(135deg, rgba(255, 170, 0, 0.08), rgba(255, 85, 0, 0.08));
-    border-color: rgba(255, 170, 0, 0.3);
-}
-
-.balance-price-box {
-    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 240, 255, 0.2);
 }
 
 .price-label {
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     color: var(--text-muted);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.5rem;
 }
 
 .price-amount {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 800;
     color: var(--primary-cyan);
     line-height: 1.1;
-    text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-}
-
-.advance-amount {
-    font-family: var(--font-heading);
-    font-size: 1.85rem;
-    font-weight: 800;
-    color: var(--primary-gold);
-    line-height: 1.1;
-    text-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
-}
-
-.balance-amount {
-    font-family: var(--font-heading);
-    font-size: 1.85rem;
-    font-weight: 800;
-    color: var(--text-main);
-    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    margin-bottom: 0.75rem;
 }
 
 .price-note {
@@ -1633,17 +1599,12 @@ body {
         gap: 1.25rem;
     }
 
-    .price-breakdown-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
+    .single-price-box {
+        padding: 1.5rem 1.25rem;
     }
 
     .price-amount {
         font-size: 2.25rem;
-    }
-
-    .advance-amount, .balance-amount {
-        font-size: 1.65rem;
     }
 
     .price-note {
