@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Multi-Currency Custom Art Price Calculator Engine
+    // 5. Multi-Currency Custom Art Price Calculator Engine (Exact Pricing from Artist Notebook)
     const currencySelect = document.getElementById('currency-type');
     const serviceSelect = document.getElementById('service-type');
     const portraitTypeSelect = document.getElementById('portrait-type');
@@ -103,50 +103,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const priceDisplay = document.getElementById('calc-price');
     const whatsappBtn = document.getElementById('whatsapp-order-btn');
 
-    // Multi-Currency Rates & Formats (Accurate Fixed Pricing)
-    const currencyConfig = {
+    // Exact Pricing Lookup Table (Pencil & Color Pencil: A4, A3, A2)
+    const pricingTable = {
         INR: {
             symbol: '₹',
-            code: 'INR',
-            baseRates: {
-                pencil: 2499,
-                color_pencil: 3499,
-                watercolor: 4999,
-                acrylic: 8999,
-                ghibli: 3999,
-                thread: 9999,
-                wall: 14999,
-                gifts_comics: 3999,
-                video: 4499
+            format: (val) => '₹' + val.toLocaleString('en-IN'),
+            pencil: {
+                a4: { single: 1000, double: 1700, pet: 1000, family: 2800 },
+                a3: { single: 1800, double: 2500, pet: 1800, family: 4000 },
+                a2: { single: 6000, double: 7500, pet: 6000, family: 9000 }
             },
-            subjectRate: 999,
-            format: (val) => '₹' + val.toLocaleString('en-IN')
+            color_pencil: {
+                a4: { single: 2500, double: 3300, pet: 2500, family: 4500 },
+                a3: { single: 4000, double: 5100, pet: 4000, family: 6500 },
+                a2: { single: 8000, double: 10000, pet: 8000, family: 12500 }
+            }
         },
         USD: {
             symbol: '$',
-            code: 'USD',
-            baseRates: {
-                pencil: 65,
-                color_pencil: 90,
-                watercolor: 120,
-                acrylic: 220,
-                ghibli: 95,
-                thread: 250,
-                wall: 380,
-                gifts_comics: 95,
-                video: 125
+            format: (val) => '$' + val.toLocaleString('en-US'),
+            pencil: {
+                a4: { single: 20, double: 35, pet: 20, family: 55 },
+                a3: { single: 35, double: 50, pet: 35, family: 75 },
+                a2: { single: 110, double: 140, pet: 110, family: 170 }
             },
-            subjectRate: 25,
-            format: (val) => '$' + val.toLocaleString('en-US')
+            color_pencil: {
+                a4: { single: 50, double: 65, pet: 50, family: 90 },
+                a3: { single: 75, double: 95, pet: 75, family: 125 },
+                a2: { single: 150, double: 190, pet: 150, family: 240 }
+            }
         }
-    };
-
-    const sizeMultipliers = {
-        a4: 1.0,
-        a3: 1.5,
-        canvas: 2.2,
-        mural: 3.5,
-        reel: 1.2
     };
 
     // Auto-detect country (India -> INR, International -> USD)
@@ -171,70 +157,52 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!serviceSelect || !sizeSelect || !priceDisplay) return;
 
         const currKey = (currencySelect ? currencySelect.value : 'INR') || 'INR';
-        const curr = currencyConfig[currKey] || currencyConfig.INR;
+        const curr = pricingTable[currKey] || pricingTable.INR;
 
         const service = serviceSelect.value;
         const size = sizeSelect.value;
-        
-        let subjectsCount = 1;
-        if (portraitTypeSelect) {
-            const pVal = portraitTypeSelect.value;
-            subjectsCount = (pVal === 'pet') ? 1 : (parseInt(pVal) || 1);
-        }
+        const pType = portraitTypeSelect ? portraitTypeSelect.value : 'single';
 
-        const isCustom = (service === 'custom_service' || size === 'custom_size' || (portraitTypeSelect && portraitTypeSelect.value === 'custom_portrait'));
-
-        if (isCustom) {
-            priceDisplay.textContent = 'Custom Quote';
-
-            const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
-            const sizeName = sizeSelect.options[sizeSelect.selectedIndex].text;
-            const typeName = portraitTypeSelect ? portraitTypeSelect.options[portraitTypeSelect.selectedIndex].text : `${subjectsCount} Subject(s)`;
-
-            const customMsg = encodeURIComponent(
-                `Hi ArtKid Studio! I have a custom artwork project requirement:\n` +
-                `• Service: ${serviceName}\n` +
-                `• Type: ${typeName}\n` +
-                `• Size: ${sizeName}\n\n` +
-                `Can you provide a custom quote and discuss details?`
-            );
-
-            if (whatsappBtn) {
-                whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Get Custom Quote on WhatsApp`;
-                whatsappBtn.href = `https://wa.me/?text=${customMsg}`;
-            }
-            return;
-        }
-
-        const basePrice = curr.baseRates[service] || (currKey === 'INR' ? 4999 : 120);
-        const multiplier = sizeMultipliers[size] || 1.0;
-        const subjectExtra = Math.max(0, subjectsCount - 1) * curr.subjectRate;
-
-        const totalPrice = Math.round((basePrice * multiplier) + subjectExtra);
-
-        priceDisplay.textContent = curr.format(totalPrice);
-
-        if (whatsappBtn) {
-            whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Book Order on WhatsApp`;
-        }
-
-        // Update WhatsApp pre-filled order text
         const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
         const sizeName = sizeSelect.options[sizeSelect.selectedIndex].text;
-        const typeName = portraitTypeSelect ? portraitTypeSelect.options[portraitTypeSelect.selectedIndex].text : `${subjectsCount} Subject(s)`;
-        
-        const message = encodeURIComponent(
-            `Hi ArtKid Studio! I would like to order a custom artwork:\n` +
-            `• Service: ${serviceName}\n` +
-            `• Type: ${typeName}\n` +
-            `• Size: ${sizeName}\n` +
-            `• Total Price: ${curr.format(totalPrice)}\n` +
-            `• Free Insured Delivery Included\n\n` +
-            `Can we discuss details and reference photos?`
-        );
+        const typeName = portraitTypeSelect ? portraitTypeSelect.options[portraitTypeSelect.selectedIndex].text : 'Single Portrait';
 
-        if (whatsappBtn) {
-            whatsappBtn.href = `https://wa.me/?text=${message}`;
+        // Check if this combination has an exact fixed price in the table
+        const serviceRates = curr[service];
+        const hasExactRate = serviceRates && serviceRates[size] && (serviceRates[size][pType] !== undefined);
+
+        if (hasExactRate) {
+            const exactPrice = serviceRates[size][pType];
+            priceDisplay.textContent = curr.format(exactPrice);
+
+            if (whatsappBtn) {
+                whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Book Order on WhatsApp`;
+                const message = encodeURIComponent(
+                    `Hi ArtKid Studio! I would like to order a custom artwork:\n` +
+                    `• Service: ${serviceName}\n` +
+                    `• Type: ${typeName}\n` +
+                    `• Size: ${sizeName}\n` +
+                    `• Total Price: ${curr.format(exactPrice)}\n` +
+                    `• 50% Advance Booking • Free Insured Delivery Included\n\n` +
+                    `Can we discuss details and reference photos?`
+                );
+                whatsappBtn.href = `https://wa.me/?text=${message}`;
+            }
+        } else {
+            // Other services, custom sizes, murals, or custom portraits -> Direct WhatsApp Quote
+            priceDisplay.textContent = 'Custom Quote';
+
+            if (whatsappBtn) {
+                whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp for Quote`;
+                const customMsg = encodeURIComponent(
+                    `Hi ArtKid Studio! I would like to get a quote for a custom project:\n` +
+                    `• Service: ${serviceName}\n` +
+                    `• Type: ${typeName}\n` +
+                    `• Size: ${sizeName}\n\n` +
+                    `Can you provide a custom quote and discuss details?`
+                );
+                whatsappBtn.href = `https://wa.me/?text=${customMsg}`;
+            }
         }
     }
 
