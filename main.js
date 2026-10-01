@@ -184,6 +184,32 @@ document.addEventListener('DOMContentLoaded', () => {
             subjectsCount = (pVal === 'pet') ? 1 : (parseInt(pVal) || 1);
         }
 
+        const isCustom = (service === 'custom_service' || size === 'custom_size' || (portraitTypeSelect && portraitTypeSelect.value === 'custom_portrait'));
+
+        if (isCustom) {
+            priceDisplay.textContent = 'Custom Quote';
+            if (advanceDisplay) advanceDisplay.textContent = '50% on Quote';
+            if (balanceDisplay) balanceDisplay.textContent = '50% on Approval';
+
+            const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+            const sizeName = sizeSelect.options[sizeSelect.selectedIndex].text;
+            const typeName = portraitTypeSelect ? portraitTypeSelect.options[portraitTypeSelect.selectedIndex].text : `${subjectsCount} Subject(s)`;
+
+            const customMsg = encodeURIComponent(
+                `Hi ArtKid Studio! I have a custom artwork project requirement:\n` +
+                `• Service: ${serviceName}\n` +
+                `• Type: ${typeName}\n` +
+                `• Size: ${sizeName}\n\n` +
+                `Can you provide a custom quote and discuss details?`
+            );
+
+            if (whatsappBtn) {
+                whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Get Custom Quote on WhatsApp`;
+                whatsappBtn.href = `https://wa.me/?text=${customMsg}`;
+            }
+            return;
+        }
+
         const basePrice = curr.baseRates[service] || (currKey === 'INR' ? 4999 : 120);
         const multiplier = sizeMultipliers[size] || 1.0;
         const subjectExtra = Math.max(0, subjectsCount - 1) * curr.subjectRate;
@@ -195,6 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
         priceDisplay.textContent = curr.format(totalPrice);
         if (advanceDisplay) advanceDisplay.textContent = curr.format(advancePrice);
         if (balanceDisplay) balanceDisplay.textContent = curr.format(balancePrice);
+
+        if (whatsappBtn) {
+            whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Book Order with 50% Advance`;
+        }
 
         // Update WhatsApp pre-filled order text
         const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;

@@ -1032,6 +1032,42 @@ body {
     color: var(--primary-gold);
 }
 
+.custom-inquiry-box {
+    margin-top: 1rem;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-glass);
+    border-radius: var(--radius-md);
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.custom-inquiry-box p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.custom-inquiry-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-cyan);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.custom-inquiry-link:hover {
+    color: var(--primary-gold);
+    transform: translateX(3px);
+}
+
 /* Lightbox Modal */
 .lightbox-modal {
     position: fixed;

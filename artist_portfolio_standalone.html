@@ -1050,6 +1050,42 @@ body {
     color: var(--primary-gold);
 }
 
+.custom-inquiry-box {
+    margin-top: 1rem;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-glass);
+    border-radius: var(--radius-md);
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.custom-inquiry-box p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.custom-inquiry-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-cyan);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.custom-inquiry-link:hover {
+    color: var(--primary-gold);
+    transform: translateX(3px);
+}
+
 /* Lightbox Modal */
 .lightbox-modal {
     position: fixed;
@@ -2136,6 +2172,7 @@ body {
                                 <option value="wall">Wall Design & Custom Mural Painting</option>
                                 <option value="gifts_comics">Handmade Gifts & Custom Comic Art</option>
                                 <option value="video">Instagram Reel & Smooth Video Editing</option>
+                                <option value="custom_service">✨ Other / Custom Artwork Project</option>
                             </select>
                         </div>
 
@@ -2148,6 +2185,7 @@ body {
                                 <option value="4">Family / Group Portrait (4 Persons)</option>
                                 <option value="5">Large Family / Group (5+ Persons)</option>
                                 <option value="pet">Pet / Animal Portrait (1 Subject)</option>
+                                <option value="custom_portrait">Custom Subject / Scenery</option>
                             </select>
                         </div>
 
@@ -2159,6 +2197,7 @@ body {
                                 <option value="canvas">Large Canvas (18 x 24 in)</option>
                                 <option value="mural">Wall Mural Area (Per Sq. Ft)</option>
                                 <option value="reel">Standard Reel Video (30-60s)</option>
+                                <option value="custom_size">📐 Custom Dimensions / Special Size</option>
                             </select>
                         </div>
 
@@ -2185,6 +2224,13 @@ body {
                             <a id="whatsapp-order-btn" href="https://wa.me/?text=Hi%20ArtKid!%20I%20want%20to%20order%20a%20custom%20artwork." target="_blank" class="btn btn-primary btn-block glow-btn">
                                 <i class="fa-brands fa-whatsapp"></i> Book Order with 50% Advance
                             </a>
+
+                            <div class="custom-inquiry-box">
+                                <p>Need a custom size, large wall mural, or unique request?</p>
+                                <a href="https://wa.me/?text=Hi%20ArtKid!%20I%20have%20a%20custom%20artwork%20requirement%20and%20need%20a%20quote." target="_blank" class="custom-inquiry-link">
+                                    <i class="fa-brands fa-whatsapp"></i> Chat directly on WhatsApp for Custom Quote &rarr;
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -2625,6 +2671,37 @@ document.addEventListener('DOMContentLoaded', () => {
             subjectsCount = (pVal === 'pet') ? 1 : (parseInt(pVal) || 1);
         }
 
+        const isCustom = (service === 'custom_service' || size === 'custom_size' || (portraitTypeSelect && portraitTypeSelect.value === 'custom_portrait'));
+
+        if (isCustom) {
+            priceDisplay.textContent = 'Custom Quote';
+            if (advanceDisplay) advanceDisplay.textContent = '50% on Quote';
+            if (balanceDisplay) balanceDisplay.textContent = '50% on Approval';
+
+            const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+            const sizeName = sizeSelect.options[sizeSelect.selectedIndex].text;
+            const typeName = portraitTypeSelect ? portraitTypeSelect.options[portraitTypeSelect.selectedIndex].text : `${subjectsCount} Subject(s)`;
+
+            const customMsg = encodeURIComponent(
+                `Hi ArtKid Studio! I have a custom artwork project requirement:
+` +
+                `• Service: ${serviceName}
+` +
+                `• Type: ${typeName}
+` +
+                `• Size: ${sizeName}
+
+` +
+                `Can you provide a custom quote and discuss details?`
+            );
+
+            if (whatsappBtn) {
+                whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Get Custom Quote on WhatsApp`;
+                whatsappBtn.href = `https://wa.me/?text=${customMsg}`;
+            }
+            return;
+        }
+
         const basePrice = curr.baseRates[service] || (currKey === 'INR' ? 4999 : 120);
         const multiplier = sizeMultipliers[size] || 1.0;
         const subjectExtra = Math.max(0, subjectsCount - 1) * curr.subjectRate;
@@ -2636,6 +2713,10 @@ document.addEventListener('DOMContentLoaded', () => {
         priceDisplay.textContent = curr.format(totalPrice);
         if (advanceDisplay) advanceDisplay.textContent = curr.format(advancePrice);
         if (balanceDisplay) balanceDisplay.textContent = curr.format(balancePrice);
+
+        if (whatsappBtn) {
+            whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Book Order with 50% Advance`;
+        }
 
         // Update WhatsApp pre-filled order text
         const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
