@@ -964,31 +964,90 @@ body {
     gap: 1.5rem;
 }
 
-.price-display {
+.price-breakdown-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 1.25rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.price-box {
+    background: rgba(7, 8, 13, 0.7);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1rem;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.price-box:hover {
+    border-color: var(--border-glass-hover);
+    transform: translateY(-2px);
+}
+
+.main-price-box {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(157, 78, 221, 0.08));
+    border-color: rgba(0, 240, 255, 0.3);
+}
+
+.advance-price-box {
+    background: linear-gradient(135deg, rgba(255, 170, 0, 0.08), rgba(255, 85, 0, 0.08));
+    border-color: rgba(255, 170, 0, 0.3);
+}
+
+.balance-price-box {
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .price-label {
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 700;
     letter-spacing: 1px;
     color: var(--text-muted);
+    margin-bottom: 0.35rem;
 }
 
 .price-amount {
     font-family: var(--font-heading);
-    font-size: 3.5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-cyan);
+    line-height: 1.1;
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.advance-amount {
+    font-family: var(--font-heading);
+    font-size: 1.85rem;
     font-weight: 800;
     color: var(--primary-gold);
-    text-shadow: 0 0 20px rgba(255, 170, 0, 0.4);
+    line-height: 1.1;
+    text-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+}
+
+.balance-amount {
+    font-family: var(--font-heading);
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1.1;
 }
 
 .price-note {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
+    text-align: center;
+    line-height: 1.5;
+}
+
+.price-note strong {
+    color: var(--primary-gold);
 }
 
 /* Lightbox Modal */
@@ -1556,12 +1615,21 @@ body {
         gap: 1.25rem;
     }
 
+    .price-breakdown-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
     .price-amount {
-        font-size: clamp(2.4rem, 8vw, 3.2rem);
+        font-size: 2.25rem;
+    }
+
+    .advance-amount, .balance-amount {
+        font-size: 1.65rem;
     }
 
     .price-note {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         text-align: center;
         padding: 0 0.5rem;
     }
@@ -1754,7 +1822,7 @@ body {
                         <i class="fa-solid fa-palette"></i> Master Artist & Visual Studio
                     </div>
                     <h1 class="hero-title">
-                        Bringing Your <span class="gradient-text">Imagination</span> to Life in 3D & Fine Art
+                        Bringing Your <span class="gradient-text">Imagination</span> to Life in Fine Art
                     </h1>
                     <p class="hero-subtitle">
                         From hand-drawn pencil sketches and vibrant Ghibli art to custom wall murals, thread art, and high-impact Instagram Reels editing.
@@ -2059,13 +2127,27 @@ body {
                         <div class="calc-group">
                             <label for="service-type"><i class="fa-solid fa-paintbrush"></i> Service Category</label>
                             <select id="service-type" class="calc-select">
-                                <option value="pencil">Pencil Sketch / Color Pencil (Portraits)</option>
+                                <option value="pencil">Pencil Sketch (Graphite Portrait)</option>
+                                <option value="color_pencil">Colour Pencil Sketch (Vibrant Portrait)</option>
                                 <option value="watercolor" selected>Water Colour Portrait Painting</option>
                                 <option value="acrylic">Acrylic Painting on Stretched Canvas</option>
-                                <option value="ghibli">Custom Ghibli Style Digital/Art</option>
-                                <option value="thread">Thread / String Art Panel</option>
-                                <option value="wall">Wall Design & Mural Painting</option>
-                                <option value="video">Instagram Reel / Video Editing</option>
+                                <option value="ghibli">Studio Ghibli Inspired Anime Art</option>
+                                <option value="thread">Thread & String Art (Wooden Panel)</option>
+                                <option value="wall">Wall Design & Custom Mural Painting</option>
+                                <option value="gifts_comics">Handmade Gifts & Custom Comic Art</option>
+                                <option value="video">Instagram Reel & Smooth Video Editing</option>
+                            </select>
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="portrait-type"><i class="fa-solid fa-users"></i> Portrait / Subject Type</label>
+                            <select id="portrait-type" class="calc-select">
+                                <option value="1" selected>Single Portrait (1 Person / Subject)</option>
+                                <option value="2">Couple / Double Portrait (2 Persons)</option>
+                                <option value="3">Family / Group Portrait (3 Persons)</option>
+                                <option value="4">Family / Group Portrait (4 Persons)</option>
+                                <option value="5">Large Family / Group (5+ Persons)</option>
+                                <option value="pet">Pet / Animal Portrait (1 Subject)</option>
                             </select>
                         </div>
 
@@ -2075,25 +2157,33 @@ body {
                                 <option value="a4">A4 Size (8.3 x 11.7 in)</option>
                                 <option value="a3" selected>A3 Size (11.7 x 16.5 in)</option>
                                 <option value="canvas">Large Canvas (18 x 24 in)</option>
-                                <option value="mural">Wall Area (Per Sq. Ft)</option>
-                                <option value="reel">Standard Reel (30-60 Seconds)</option>
+                                <option value="mural">Wall Mural Area (Per Sq. Ft)</option>
+                                <option value="reel">Standard Reel Video (30-60s)</option>
                             </select>
                         </div>
 
-                        <div class="calc-group">
-                            <label for="subjects-count"><i class="fa-solid fa-user"></i> Number of Persons / Subjects</label>
-                            <input type="number" id="subjects-count" class="calc-input" value="1" min="1" max="10">
-                        </div>
-
                         <div class="calc-result-box">
-                            <div class="price-display">
-                                <span class="price-label">Total Price</span>
-                                <span class="price-amount" id="calc-price">₹7,499</span>
-                                <span class="price-note"><i class="fa-solid fa-truck-fast"></i> 100% Free Express Insured Delivery & Premium Materials Included</span>
+                            <div class="price-breakdown-grid">
+                                <div class="price-box main-price-box">
+                                    <span class="price-label">Total Final Price</span>
+                                    <span class="price-amount" id="calc-price">₹7,499</span>
+                                </div>
+                                <div class="price-box advance-price-box">
+                                    <span class="price-label">50% Advance to Start</span>
+                                    <span class="advance-amount" id="calc-advance">₹3,750</span>
+                                </div>
+                                <div class="price-box balance-price-box">
+                                    <span class="price-label">50% on Final Approval</span>
+                                    <span class="balance-amount" id="calc-balance">₹3,749</span>
+                                </div>
                             </div>
 
+                            <span class="price-note">
+                                <i class="fa-solid fa-shield-halved"></i> <strong>50% Advance Booking</strong> • Remaining 50% only after you approve the final artwork • Free Insured Delivery Included
+                            </span>
+
                             <a id="whatsapp-order-btn" href="https://wa.me/?text=Hi%20ArtKid!%20I%20want%20to%20order%20a%20custom%20artwork." target="_blank" class="btn btn-primary btn-block glow-btn">
-                                <i class="fa-brands fa-whatsapp"></i> Book Order via WhatsApp
+                                <i class="fa-brands fa-whatsapp"></i> Book Order with 50% Advance
                             </a>
                         </div>
                     </form>
@@ -2449,9 +2539,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Multi-Currency Custom Art Price Calculator Engine
     const currencySelect = document.getElementById('currency-type');
     const serviceSelect = document.getElementById('service-type');
+    const portraitTypeSelect = document.getElementById('portrait-type');
     const sizeSelect = document.getElementById('art-size');
-    const subjectsInput = document.getElementById('subjects-count');
     const priceDisplay = document.getElementById('calc-price');
+    const advanceDisplay = document.getElementById('calc-advance');
+    const balanceDisplay = document.getElementById('calc-balance');
     const whatsappBtn = document.getElementById('whatsapp-order-btn');
 
     // Multi-Currency Rates & Formats (Accurate Fixed Pricing)
@@ -2461,11 +2553,13 @@ document.addEventListener('DOMContentLoaded', () => {
             code: 'INR',
             baseRates: {
                 pencil: 2499,
+                color_pencil: 3499,
                 watercolor: 4999,
                 acrylic: 8999,
                 ghibli: 3999,
                 thread: 9999,
                 wall: 14999,
+                gifts_comics: 3999,
                 video: 4499
             },
             subjectRate: 999,
@@ -2476,11 +2570,13 @@ document.addEventListener('DOMContentLoaded', () => {
             code: 'USD',
             baseRates: {
                 pencil: 65,
+                color_pencil: 90,
                 watercolor: 120,
                 acrylic: 220,
                 ghibli: 95,
                 thread: 250,
                 wall: 380,
+                gifts_comics: 95,
                 video: 125
             },
             subjectRate: 25,
@@ -2515,37 +2611,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updatePrice() {
-        if (!serviceSelect || !sizeSelect || !subjectsInput || !priceDisplay) return;
+        if (!serviceSelect || !sizeSelect || !priceDisplay) return;
 
         const currKey = (currencySelect ? currencySelect.value : 'INR') || 'INR';
         const curr = currencyConfig[currKey] || currencyConfig.INR;
 
         const service = serviceSelect.value;
         const size = sizeSelect.value;
-        const subjects = parseInt(subjectsInput.value) || 1;
+        
+        let subjectsCount = 1;
+        if (portraitTypeSelect) {
+            const pVal = portraitTypeSelect.value;
+            subjectsCount = (pVal === 'pet') ? 1 : (parseInt(pVal) || 1);
+        }
 
         const basePrice = curr.baseRates[service] || (currKey === 'INR' ? 4999 : 120);
         const multiplier = sizeMultipliers[size] || 1.0;
-        const subjectExtra = Math.max(0, subjects - 1) * curr.subjectRate;
+        const subjectExtra = Math.max(0, subjectsCount - 1) * curr.subjectRate;
 
         const totalPrice = Math.round((basePrice * multiplier) + subjectExtra);
+        const advancePrice = Math.round(totalPrice * 0.5);
+        const balancePrice = totalPrice - advancePrice;
 
         priceDisplay.textContent = curr.format(totalPrice);
+        if (advanceDisplay) advanceDisplay.textContent = curr.format(advancePrice);
+        if (balanceDisplay) balanceDisplay.textContent = curr.format(balancePrice);
 
         // Update WhatsApp pre-filled order text
         const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
         const sizeName = sizeSelect.options[sizeSelect.selectedIndex].text;
+        const typeName = portraitTypeSelect ? portraitTypeSelect.options[portraitTypeSelect.selectedIndex].text : `${subjectsCount} Subject(s)`;
         
         const message = encodeURIComponent(
             `Hi ArtKid Studio! I would like to order a custom artwork:
 ` +
             `• Service: ${serviceName}
 ` +
+            `• Type: ${typeName}
+` +
             `• Size: ${sizeName}
 ` +
-            `• Subjects: ${subjects}
+            `• Total Price: ${curr.format(totalPrice)}
 ` +
-            `• Total Price: ${curr.format(totalPrice)} (Free Insured Delivery Included)
+            `• 50% Advance to Start: ${curr.format(advancePrice)} (Remaining 50% only after approving final artwork)
+` +
+            `• Free Insured Delivery Included
 
 ` +
             `Can we discuss details and reference photos?`
@@ -2556,11 +2666,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    if (serviceSelect && sizeSelect && subjectsInput) {
+    if (serviceSelect && sizeSelect) {
         if (currencySelect) currencySelect.addEventListener('change', updatePrice);
+        if (portraitTypeSelect) portraitTypeSelect.addEventListener('change', updatePrice);
         serviceSelect.addEventListener('change', updatePrice);
         sizeSelect.addEventListener('change', updatePrice);
-        subjectsInput.addEventListener('input', updatePrice);
         updatePrice(); // initial calculation
     }
 

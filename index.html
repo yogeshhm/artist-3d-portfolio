@@ -78,7 +78,7 @@
                         <i class="fa-solid fa-palette"></i> Master Artist & Visual Studio
                     </div>
                     <h1 class="hero-title">
-                        Bringing Your <span class="gradient-text">Imagination</span> to Life in 3D & Fine Art
+                        Bringing Your <span class="gradient-text">Imagination</span> to Life in Fine Art
                     </h1>
                     <p class="hero-subtitle">
                         From hand-drawn pencil sketches and vibrant Ghibli art to custom wall murals, thread art, and high-impact Instagram Reels editing.
@@ -383,13 +383,27 @@
                         <div class="calc-group">
                             <label for="service-type"><i class="fa-solid fa-paintbrush"></i> Service Category</label>
                             <select id="service-type" class="calc-select">
-                                <option value="pencil">Pencil Sketch / Color Pencil (Portraits)</option>
+                                <option value="pencil">Pencil Sketch (Graphite Portrait)</option>
+                                <option value="color_pencil">Colour Pencil Sketch (Vibrant Portrait)</option>
                                 <option value="watercolor" selected>Water Colour Portrait Painting</option>
                                 <option value="acrylic">Acrylic Painting on Stretched Canvas</option>
-                                <option value="ghibli">Custom Ghibli Style Digital/Art</option>
-                                <option value="thread">Thread / String Art Panel</option>
-                                <option value="wall">Wall Design & Mural Painting</option>
-                                <option value="video">Instagram Reel / Video Editing</option>
+                                <option value="ghibli">Studio Ghibli Inspired Anime Art</option>
+                                <option value="thread">Thread & String Art (Wooden Panel)</option>
+                                <option value="wall">Wall Design & Custom Mural Painting</option>
+                                <option value="gifts_comics">Handmade Gifts & Custom Comic Art</option>
+                                <option value="video">Instagram Reel & Smooth Video Editing</option>
+                            </select>
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="portrait-type"><i class="fa-solid fa-users"></i> Portrait / Subject Type</label>
+                            <select id="portrait-type" class="calc-select">
+                                <option value="1" selected>Single Portrait (1 Person / Subject)</option>
+                                <option value="2">Couple / Double Portrait (2 Persons)</option>
+                                <option value="3">Family / Group Portrait (3 Persons)</option>
+                                <option value="4">Family / Group Portrait (4 Persons)</option>
+                                <option value="5">Large Family / Group (5+ Persons)</option>
+                                <option value="pet">Pet / Animal Portrait (1 Subject)</option>
                             </select>
                         </div>
 
@@ -399,25 +413,33 @@
                                 <option value="a4">A4 Size (8.3 x 11.7 in)</option>
                                 <option value="a3" selected>A3 Size (11.7 x 16.5 in)</option>
                                 <option value="canvas">Large Canvas (18 x 24 in)</option>
-                                <option value="mural">Wall Area (Per Sq. Ft)</option>
-                                <option value="reel">Standard Reel (30-60 Seconds)</option>
+                                <option value="mural">Wall Mural Area (Per Sq. Ft)</option>
+                                <option value="reel">Standard Reel Video (30-60s)</option>
                             </select>
                         </div>
 
-                        <div class="calc-group">
-                            <label for="subjects-count"><i class="fa-solid fa-user"></i> Number of Persons / Subjects</label>
-                            <input type="number" id="subjects-count" class="calc-input" value="1" min="1" max="10">
-                        </div>
-
                         <div class="calc-result-box">
-                            <div class="price-display">
-                                <span class="price-label">Total Price</span>
-                                <span class="price-amount" id="calc-price">₹7,499</span>
-                                <span class="price-note"><i class="fa-solid fa-truck-fast"></i> 100% Free Express Insured Delivery & Premium Materials Included</span>
+                            <div class="price-breakdown-grid">
+                                <div class="price-box main-price-box">
+                                    <span class="price-label">Total Final Price</span>
+                                    <span class="price-amount" id="calc-price">₹7,499</span>
+                                </div>
+                                <div class="price-box advance-price-box">
+                                    <span class="price-label">50% Advance to Start</span>
+                                    <span class="advance-amount" id="calc-advance">₹3,750</span>
+                                </div>
+                                <div class="price-box balance-price-box">
+                                    <span class="price-label">50% on Final Approval</span>
+                                    <span class="balance-amount" id="calc-balance">₹3,749</span>
+                                </div>
                             </div>
 
+                            <span class="price-note">
+                                <i class="fa-solid fa-shield-halved"></i> <strong>50% Advance Booking</strong> • Remaining 50% only after you approve the final artwork • Free Insured Delivery Included
+                            </span>
+
                             <a id="whatsapp-order-btn" href="https://wa.me/?text=Hi%20ArtKid!%20I%20want%20to%20order%20a%20custom%20artwork." target="_blank" class="btn btn-primary btn-block glow-btn">
-                                <i class="fa-brands fa-whatsapp"></i> Book Order via WhatsApp
+                                <i class="fa-brands fa-whatsapp"></i> Book Order with 50% Advance
                             </a>
                         </div>
                     </form>

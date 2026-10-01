@@ -98,9 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Multi-Currency Custom Art Price Calculator Engine
     const currencySelect = document.getElementById('currency-type');
     const serviceSelect = document.getElementById('service-type');
+    const portraitTypeSelect = document.getElementById('portrait-type');
     const sizeSelect = document.getElementById('art-size');
-    const subjectsInput = document.getElementById('subjects-count');
     const priceDisplay = document.getElementById('calc-price');
+    const advanceDisplay = document.getElementById('calc-advance');
+    const balanceDisplay = document.getElementById('calc-balance');
     const whatsappBtn = document.getElementById('whatsapp-order-btn');
 
     // Multi-Currency Rates & Formats (Accurate Fixed Pricing)
@@ -110,11 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
             code: 'INR',
             baseRates: {
                 pencil: 2499,
+                color_pencil: 3499,
                 watercolor: 4999,
                 acrylic: 8999,
                 ghibli: 3999,
                 thread: 9999,
                 wall: 14999,
+                gifts_comics: 3999,
                 video: 4499
             },
             subjectRate: 999,
@@ -125,11 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
             code: 'USD',
             baseRates: {
                 pencil: 65,
+                color_pencil: 90,
                 watercolor: 120,
                 acrylic: 220,
                 ghibli: 95,
                 thread: 250,
                 wall: 380,
+                gifts_comics: 95,
                 video: 125
             },
             subjectRate: 25,
@@ -164,33 +170,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updatePrice() {
-        if (!serviceSelect || !sizeSelect || !subjectsInput || !priceDisplay) return;
+        if (!serviceSelect || !sizeSelect || !priceDisplay) return;
 
         const currKey = (currencySelect ? currencySelect.value : 'INR') || 'INR';
         const curr = currencyConfig[currKey] || currencyConfig.INR;
 
         const service = serviceSelect.value;
         const size = sizeSelect.value;
-        const subjects = parseInt(subjectsInput.value) || 1;
+        
+        let subjectsCount = 1;
+        if (portraitTypeSelect) {
+            const pVal = portraitTypeSelect.value;
+            subjectsCount = (pVal === 'pet') ? 1 : (parseInt(pVal) || 1);
+        }
 
         const basePrice = curr.baseRates[service] || (currKey === 'INR' ? 4999 : 120);
         const multiplier = sizeMultipliers[size] || 1.0;
-        const subjectExtra = Math.max(0, subjects - 1) * curr.subjectRate;
+        const subjectExtra = Math.max(0, subjectsCount - 1) * curr.subjectRate;
 
         const totalPrice = Math.round((basePrice * multiplier) + subjectExtra);
+        const advancePrice = Math.round(totalPrice * 0.5);
+        const balancePrice = totalPrice - advancePrice;
 
         priceDisplay.textContent = curr.format(totalPrice);
+        if (advanceDisplay) advanceDisplay.textContent = curr.format(advancePrice);
+        if (balanceDisplay) balanceDisplay.textContent = curr.format(balancePrice);
 
         // Update WhatsApp pre-filled order text
         const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
         const sizeName = sizeSelect.options[sizeSelect.selectedIndex].text;
+        const typeName = portraitTypeSelect ? portraitTypeSelect.options[portraitTypeSelect.selectedIndex].text : `${subjectsCount} Subject(s)`;
         
         const message = encodeURIComponent(
             `Hi ArtKid Studio! I would like to order a custom artwork:\n` +
             `• Service: ${serviceName}\n` +
+            `• Type: ${typeName}\n` +
             `• Size: ${sizeName}\n` +
-            `• Subjects: ${subjects}\n` +
-            `• Total Price: ${curr.format(totalPrice)} (Free Insured Delivery Included)\n\n` +
+            `• Total Price: ${curr.format(totalPrice)}\n` +
+            `• 50% Advance to Start: ${curr.format(advancePrice)} (Remaining 50% only after approving final artwork)\n` +
+            `• Free Insured Delivery Included\n\n` +
             `Can we discuss details and reference photos?`
         );
 
@@ -199,11 +217,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    if (serviceSelect && sizeSelect && subjectsInput) {
+    if (serviceSelect && sizeSelect) {
         if (currencySelect) currencySelect.addEventListener('change', updatePrice);
+        if (portraitTypeSelect) portraitTypeSelect.addEventListener('change', updatePrice);
         serviceSelect.addEventListener('change', updatePrice);
         sizeSelect.addEventListener('change', updatePrice);
-        subjectsInput.addEventListener('input', updatePrice);
         updatePrice(); // initial calculation
     }
 
