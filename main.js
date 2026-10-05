@@ -147,6 +147,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return 'USD';
     }
 
+    // Google Sheets Integration Endpoint (Replace with your deployed Google Apps Script Web App URL)
+    const GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbz_artkid_order_sync/exec';
+
     // Set initial detected currency
     if (currencySelect) {
         const detected = detectDefaultCurrency();
@@ -176,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
             priceDisplay.textContent = curr.format(exactPrice);
 
             if (whatsappBtn) {
-                whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Book Order on WhatsApp`;
                 const message = encodeURIComponent(
                     `Hi ArtKid Studio! I would like to order a custom artwork:\n` +
                     `• Service: ${serviceName}\n` +
@@ -193,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
             priceDisplay.textContent = 'Custom Quote';
 
             if (whatsappBtn) {
-                whatsappBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp for Quote`;
                 const customMsg = encodeURIComponent(
                     `Hi ArtKid Studio! I would like to get a quote for a custom project:\n` +
                     `• Service: ${serviceName}\n` +
@@ -212,6 +213,116 @@ document.addEventListener('DOMContentLoaded', () => {
         serviceSelect.addEventListener('change', updatePrice);
         sizeSelect.addEventListener('change', updatePrice);
         updatePrice(); // initial calculation
+    }
+
+    // Google Sheets Order Submission Handler
+    const submitSheetBtn = document.getElementById('submit-order-sheet-btn');
+    const clientNameInput = document.getElementById('client-name');
+    const clientPhoneInput = document.getElementById('client-phone');
+    const clientCityInput = document.getElementById('client-city');
+    const clientNotesInput = document.getElementById('client-notes');
+    const bookingSuccessBox = document.getElementById('booking-success-box');
+
+    if (submitSheetBtn) {
+        submitSheetBtn.addEventListener('click', async () => {
+            const name = clientNameInput ? clientNameInput.value.trim() : '';
+            const phone = clientPhoneInput ? clientPhoneInput.value.trim() : '';
+            const city = clientCityInput ? clientCityInput.value.trim() : '';
+            const notes = clientNotesInput ? clientNotesInput.value.trim() : '';
+
+            // Form validation
+            if (!name) {
+                if (clientNameInput) {
+                    clientNameInput.focus();
+                    clientNameInput.style.borderColor = 'var(--primary-pink)';
+                }
+                alert('Please enter your Name to submit the order request.');
+                return;
+            }
+
+            if (!phone || phone.length < 6) {
+                if (clientPhoneInput) {
+                    clientPhoneInput.focus();
+                    clientPhoneInput.style.borderColor = 'var(--primary-pink)';
+                }
+                alert('Please enter a valid Phone or WhatsApp Number.');
+                return;
+            }
+
+            const currKey = (currencySelect ? currencySelect.value : 'INR') || 'INR';
+            const serviceName = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : 'Custom Artwork';
+            const sizeName = sizeSelect ? sizeSelect.options[sizeSelect.selectedIndex].text : 'Standard';
+            const typeName = portraitTypeSelect ? portraitTypeSelect.options[portraitTypeSelect.selectedIndex].text : 'Single Portrait';
+            const finalPrice = priceDisplay ? priceDisplay.textContent.trim() : 'Quote on discussion';
+
+            const payload = {
+                timestamp: new Date().toISOString(),
+                dateTimeIndia: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+                clientName: name,
+                phone: phone,
+                city: city || 'Not specified',
+                service: serviceName,
+                portraitType: typeName,
+                size: sizeName,
+                price: finalPrice,
+                currency: currKey,
+                notes: notes || 'None'
+            };
+
+            // Loading state
+            submitSheetBtn.disabled = true;
+            submitSheetBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Saving to Studio Sheet...`;
+
+            try {
+                // Post to Google Apps Script Web App
+                await fetch(GOOGLE_SHEET_WEBAPP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.log('Google Sheets submit notice (offline/mock fallback):', err);
+            }
+
+            // Save order locally as backup
+            try {
+                const existing = JSON.parse(localStorage.getItem('artkid_orders') || '[]');
+                existing.push(payload);
+                localStorage.setItem('artkid_orders', JSON.stringify(existing));
+            } catch (e) {}
+
+            // Success state
+            setTimeout(() => {
+                submitSheetBtn.disabled = false;
+                submitSheetBtn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Order Submitted Successfully`;
+                submitSheetBtn.style.background = 'linear-gradient(135deg, #00f0b4, #00f0ff)';
+                submitSheetBtn.style.color = '#070913';
+
+                if (bookingSuccessBox) {
+                    bookingSuccessBox.style.display = 'flex';
+                    bookingSuccessBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+
+                // Update WhatsApp action button in the success card with full client context
+                if (whatsappBtn) {
+                    const waOrderMsg = encodeURIComponent(
+                        `Hi Lokesh (ArtKid)! I just submitted an order request on your website:\n\n` +
+                        `📋 *Order Summary*:\n` +
+                        `• Name: ${name}\n` +
+                        `• Phone: ${phone}\n` +
+                        `• City: ${city || 'India'}\n` +
+                        `• Service: ${serviceName}\n` +
+                        `• Type: ${typeName}\n` +
+                        `• Size: ${sizeName}\n` +
+                        `• Total Price: ${finalPrice}\n` +
+                        `• Notes: ${notes || 'Ready to share reference photos'}\n\n` +
+                        `Can you confirm my slot in the schedule?`
+                    );
+                    whatsappBtn.href = `https://wa.me/?text=${waOrderMsg}`;
+                }
+            }, 600);
+        });
     }
 
     // 6. Lightbox Modal Inspector

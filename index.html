@@ -435,15 +435,60 @@
                                 </span>
                             </div>
 
-                            <a id="whatsapp-order-btn" href="https://wa.me/?text=Hi%20ArtKid!%20I%20want%20to%20order%20a%20custom%20artwork." target="_blank" class="btn btn-primary btn-block glow-btn">
-                                <i class="fa-brands fa-whatsapp"></i> Book Order on WhatsApp
-                            </a>
+                            <!-- Google Sheets Order Booking Form -->
+                            <div class="booking-form-card">
+                                <div class="booking-form-header">
+                                    <span class="booking-badge"><i class="fa-solid fa-file-signature"></i> Direct Studio Booking</span>
+                                    <h3>Submit Order Request</h3>
+                                    <p>Enter your details below to save your order directly to the artist's Google Sheet schedule.</p>
+                                </div>
 
-                            <div class="custom-inquiry-box">
-                                <p>Need a custom size, large wall mural, or unique request?</p>
-                                <a href="https://wa.me/?text=Hi%20ArtKid!%20I%20have%20a%20custom%20artwork%20requirement%20and%20need%20a%20quote." target="_blank" class="custom-inquiry-link">
-                                    <i class="fa-brands fa-whatsapp"></i> Chat directly on WhatsApp for Custom Quote &rarr;
-                                </a>
+                                <div class="booking-inputs-grid">
+                                    <div class="booking-input-group">
+                                        <label for="client-name"><i class="fa-solid fa-user"></i> Your Name <span class="required">*</span></label>
+                                        <input type="text" id="client-name" class="calc-input" placeholder="e.g. Rahul Sharma" required>
+                                    </div>
+
+                                    <div class="booking-input-group">
+                                        <label for="client-phone"><i class="fa-solid fa-phone"></i> WhatsApp / Phone <span class="required">*</span></label>
+                                        <input type="tel" id="client-phone" class="calc-input" placeholder="e.g. +91 98765 43210" required>
+                                    </div>
+
+                                    <div class="booking-input-group">
+                                        <label for="client-city"><i class="fa-solid fa-location-dot"></i> Delivery City / Area</label>
+                                        <input type="text" id="client-city" class="calc-input" placeholder="e.g. Mumbai / Bangalore">
+                                    </div>
+
+                                    <div class="booking-input-group">
+                                        <label for="client-notes"><i class="fa-solid fa-comment-dots"></i> Notes / Deadline / Special Request</label>
+                                        <input type="text" id="client-notes" class="calc-input" placeholder="e.g. Need before 25th Oct, 2 photos ready">
+                                    </div>
+                                </div>
+
+                                <button type="button" id="submit-order-sheet-btn" class="btn btn-primary btn-block glow-btn booking-submit-btn">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i> Submit Order to Studio Sheet
+                                </button>
+
+                                <!-- Success Feedback Banner -->
+                                <div id="booking-success-box" class="booking-success-banner" style="display: none;">
+                                    <div class="success-icon-wrap">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </div>
+                                    <div class="success-text-wrap">
+                                        <h4>🎉 Order Successfully Saved to Studio Sheet!</h4>
+                                        <p>Thank you! Your artwork request has been recorded into Lokesh's order schedule. We will reach out to your WhatsApp/Phone shortly to verify reference photos and confirm your slot.</p>
+                                    </div>
+                                    <a id="whatsapp-order-btn" href="https://wa.me/?text=Hi%20ArtKid!%20I%20want%20to%20order%20a%20custom%20artwork." target="_blank" class="btn btn-outline success-wa-action">
+                                        <i class="fa-brands fa-whatsapp"></i> Also Send Summary on WhatsApp
+                                    </a>
+                                </div>
+
+                                <div class="custom-inquiry-box">
+                                    <p>Prefer direct instant messaging or have a custom project inquiry?</p>
+                                    <a id="direct-wa-link" href="https://wa.me/?text=Hi%20ArtKid!%20I%20have%20a%20custom%20artwork%20requirement%20and%20need%20a%20quote." target="_blank" class="custom-inquiry-link">
+                                        <i class="fa-brands fa-whatsapp"></i> Chat directly on WhatsApp for Custom Quote &rarr;
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </form>

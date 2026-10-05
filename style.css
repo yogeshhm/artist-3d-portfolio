@@ -1007,6 +1007,149 @@ body {
     color: var(--primary-gold);
 }
 
+/* Booking Form & Google Sheets Card */
+.booking-form-card {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 2.25rem 2.5rem;
+    background: rgba(14, 18, 30, 0.7);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.booking-form-header {
+    text-align: center;
+}
+
+.booking-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-radius: var(--radius-full);
+    color: var(--primary-cyan);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.booking-form-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 0.35rem;
+    color: #fff;
+}
+
+.booking-form-header p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.booking-inputs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.booking-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.booking-input-group label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.booking-input-group .required {
+    color: var(--primary-pink);
+    font-weight: bold;
+}
+
+.booking-submit-btn {
+    margin-top: 0.5rem;
+    padding: 1rem 1.75rem;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    cursor: pointer;
+}
+
+.booking-success-banner {
+    padding: 1.75rem 1.5rem;
+    background: linear-gradient(135deg, rgba(0, 240, 180, 0.12), rgba(0, 240, 255, 0.06));
+    border: 1px solid rgba(0, 240, 180, 0.4);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.success-icon-wrap {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(0, 240, 180, 0.15);
+    border: 1px solid rgba(0, 240, 180, 0.4);
+    color: #00f0b4;
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-text-wrap h4 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: #00f0b4;
+    margin-bottom: 0.35rem;
+}
+
+.success-text-wrap p {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    line-height: 1.5;
+    max-width: 600px;
+}
+
+.success-wa-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.95rem;
+    border-color: rgba(37, 211, 102, 0.5);
+    color: #25d366;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+}
+
+.success-wa-action:hover {
+    background: rgba(37, 211, 102, 0.15);
+    border-color: #25d366;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
+}
+
 .custom-inquiry-box {
     margin-top: 1rem;
     padding: 1.25rem;
@@ -1620,6 +1763,16 @@ body {
         font-size: 0.8rem;
         text-align: center;
         padding: 0 0.5rem;
+    }
+
+    .booking-form-card {
+        padding: 1.5rem 1.15rem;
+        gap: 1.15rem;
+    }
+
+    .booking-inputs-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     /* About Section Mobile */
