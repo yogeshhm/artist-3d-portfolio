@@ -147,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return 'USD';
     }
 
-    // Google Sheets Integration Endpoint (Replace with your deployed Google Apps Script Web App URL)
-    const GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbz_artkid_order_sync/exec';
+    // Google Sheets Integration Endpoint
+    const GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxN9BE5vsYmjkXWI4XHNCONiEfzghr-82RonqKTJqmgxm4zU2bR9_AjCCw5t-J88oeR/exec';
 
     // Set initial detected currency
     if (currencySelect) {
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 await fetch(GOOGLE_SHEET_WEBAPP_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
             } catch (err) {
