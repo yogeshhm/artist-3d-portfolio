@@ -273,14 +273,20 @@ document.addEventListener('DOMContentLoaded', () => {
             submitSheetBtn.disabled = true;
             submitSheetBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Saving to Studio Sheet...`;
 
+            // Multi-channel dispatch (POST JSON + GET Query Params Beacon)
             try {
-                // Post to Google Apps Script Web App
-                await fetch(GOOGLE_SHEET_WEBAPP_URL, {
+                // Channel 1: Standard POST request
+                fetch(GOOGLE_SHEET_WEBAPP_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
-                });
+                }).catch(e => {});
+
+                // Channel 2: GET fallback with URL query parameters
+                const queryParams = new URLSearchParams(payload).toString();
+                const beacon = new Image();
+                beacon.src = `${GOOGLE_SHEET_WEBAPP_URL}?${queryParams}&_cb=${Date.now()}`;
             } catch (err) {
                 console.log('Google Sheets submit notice (offline/mock fallback):', err);
             }
